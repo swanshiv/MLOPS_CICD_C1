@@ -1,8 +1,13 @@
 import torch
 import pytest
+import sys
+import os
+
+# Add the project root directory to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from src.model import MNISTModel
 from torchvision import datasets, transforms
-import os
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -45,4 +50,4 @@ def test_model_accuracy():
             correct += (predicted == target).sum().item()
     
     accuracy = 100 * correct / total
-    assert accuracy > 80, f"Model accuracy {accuracy:.2f}% is below 80%" 
+    assert accuracy > 80, f"Model accuracy {accuracy:.2f}% is below 80%"
