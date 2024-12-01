@@ -14,7 +14,19 @@ def count_parameters(model):
 
 def test_model_parameters():
     model = MNISTModel()
-    assert count_parameters(model) < 100000, "Model has too many parameters"
+    assert count_parameters(model) < 25000, "Model has too many parameters"
+
+def test_strict_parameter_limit():
+    model = MNISTModel()
+    param_count = count_parameters(model)
+    assert param_count < 15000, f"Model has {param_count} parameters, which exceeds the strict limit of 15,000"
+
+def test_layer_sizes():
+    model = MNISTModel()
+    assert model.conv1.out_channels == 8, "First conv layer should have 8 output channels"
+    assert model.conv2.out_channels == 16, "Second conv layer should have 16 output channels"
+    assert model.fc1.out_features == 64, "First FC layer should output 64 features"
+    assert model.fc2.out_features == 10, "Final layer should output 10 classes"
 
 def test_input_output_shape():
     model = MNISTModel()
