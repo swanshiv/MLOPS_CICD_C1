@@ -14,7 +14,7 @@ def count_parameters(model):
 
 def test_model_parameters():
     model = MNISTModel()
-    assert count_parameters(model) < 100000, "Model has too many parameters"
+    assert count_parameters(model) < 25000, "Model has too many parameters"
 
 def test_strict_parameter_limit():
     model = MNISTModel()
